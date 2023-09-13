@@ -1,20 +1,20 @@
 # Isurance_Data_Analysis_using_SQL
 
 ''''sql
-CREATE TABLE insurance (
-index int,
-PatientID int,
-age int,
-gender VARCHAR(50),
-bmi float,
-bloodpressure int,
-diabetic VARCHAR(50),	
-children int,
-smoker varchar(255),
-region varchar(255),
-claim float);
+  CREATE TABLE insurance (
+  index int,
+  PatientID int,
+  age int,
+  gender VARCHAR(50),
+  bmi float,
+  bloodpressure int,
+  diabetic VARCHAR(50),	
+  children int,
+  smoker varchar(255),
+  region varchar(255),
+  claim float);
 ''''
-
+***
 ''''sql
 COPY insurance(index, PatientID, age, gender, bmi, bloodpressure, diabetic, children, smoker, region, claim)
 FROM 'D:\Data\SQL_data\insurance_data.csv'
