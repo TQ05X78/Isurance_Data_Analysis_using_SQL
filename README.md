@@ -1,14 +1,20 @@
 # Isurance_Data_Analysis_using_SQL
 
 ````sql
-SELECT 
-  sales.customer_id, 
-  SUM(menu.price) AS total_sales
-FROM dannys_diner.sales
-INNER JOIN dannys_diner.menu
-  ON sales.product_id = menu.product_id
-GROUP BY sales.customer_id
-ORDER BY sales.customer_id ASC; 
+  CREATE TABLE insurance (
+  index int,
+  PatientID int,
+  age int,
+  gender VARCHAR(50),
+  bmi float,
+  bloodpressure int,
+  diabetic VARCHAR(50),	
+  children int,
+  smoker varchar(255),
+  region varchar(255),
+  claim float);
+
+
 ````
 
 
@@ -26,6 +32,7 @@ ORDER BY sales.customer_id ASC;
   region varchar(255),
   claim float);
 ''''
+
 ***
 ''''sql
 COPY insurance(index, PatientID, age, gender, bmi, bloodpressure, diabetic, children, smoker, region, claim)
