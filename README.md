@@ -32,53 +32,60 @@ Select * from insurance;
 ````
 ***
 
-````sql
--- 2. Display the average claim amount for patients in each region.
 
+**2. Display the average claim amount for patients in each region.**
+
+````sql
 Select region, avg(claim) as claim
 from insurance
 group by region;
 ````
+***
 
--- 3. Select the maximum and minimum BMI values in the table.
+**3. Select the maximum and minimum BMI values in the table**.
 
 ````sql
 Select min(bmi) as min_bmi, max(bmi) as max_bmi 
 from insurance;
 ````
+***
+**4. Select the PatientID, age, and BMI for patients with a BMI between 40 and 50.**
 
--- 4. Select the PatientID, age, and BMI for patients with a BMI between 40 and 50.
 ````sql
 select PatientID,age,bmi from insurance where bmi between 40 and 50;
 ````
-````sql
--- 5. Select the number of smokers in each region.
+***
 
+**5. Select the number of smokers in each region.**
+
+````sql
 Select region, count(Patientid) as no_of_smoker
 from insurance
 where smoker = 'Yes'
 group by region;
 ````
 ***
+
+**6. What is the average claim amount for patients who are both diabetic and smokers?**
+
 ````sql
--- 6. What is the average claim amount for patients who are both diabetic and smokers?
-
-
 Select  avg(claim) as avg_claim 
 from insurance
 where diabetic = 'Yes' and smoker = 'Yes';
 ````
--- 7. Retrieve all patients who have a BMI greater than the average BMI of patients who are smokers.
+***
+
+
+**7. Retrieve all patients who have a BMI greater than the average BMI of patients who are smokers.**
 
 ````sql
-Select * from insurance;
-
 select * 
 from insurance where smoker='Yes' and  
 bmi > (select avg(bmi) from insurance where smoker='Yes');
 ````
+***
 
--- 8. Select the average claim amount for patients in each age group.
+**8. Select the average claim amount for patients in each age group.**
 
 ````sql
 select 
@@ -91,46 +98,48 @@ avg(claim) as avg_claim
 from insurance
 group by age_group;
 ````
+***
 
--- 9. Retrieve the total claim amount for each patient, 
--- along with the average claim amount across all patients.
+**9. Retrieve the total claim amount for each patient,along with the average claim amount across all patients.**
 
 ````sql
 select *,
 sum(claim) over(partition by PatientID) as total_claim,
 avg(claim) over() as avg_claim from insurance;
 ````
+***
 
--- 10. Retrieve the top 3 patients with the highest claim amount, along with their 
--- respective claim amounts and the total claim amount for all patients.
+**10. Retrieve the top 3 patients with the highest claim amount, along with their respective claim amounts and the total claim amount for all patients.**
 
 ````sql
 select PatientID, claim,sum(claim) over() as total_claim from insurance
 order by claim desc limit 3;
 ````
 
+***
 
--- 11. Select the details of patients who have a claim amount 
--- greater than the average claim amount for their region.
+**11. Select the details of patients who have a claim amount greater than the average claim amount for their region.**
 
+````sql
 select * from insurance t1
 where claim > (select avg(claim) from insurance t2 where t2.region = t1.region);
-
 select * from (select *, avg(claim)  over(partition by region) 
 as avg_claim from insurance) as subquery
 where claim > avg_claim;
+````
 
 
--- 12. Retrieve the rank of each patient based on their claim amount.
+**12. Retrieve the rank of each patient based on their claim amount.**
+````sql
 select * , rank() over(order by claim desc) from insurance;
+````
+***
 
+**13. Select the details of patients along with their claim amount, and their rank based on claim amount within their region.**
 
-
--- 13. Select the details of patients along with their claim amount, 
--- and their rank based on claim amount within their region.
-
+````sql
 select *, rank() over(partition by region order by claim desc) from insurance;
-
+````
 
 
 
