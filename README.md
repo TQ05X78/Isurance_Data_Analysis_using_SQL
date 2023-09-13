@@ -13,7 +13,9 @@ children int,
 smoker varchar(255),
 region varchar(255),
 claim float);
+''''
 
+''''sql
 COPY insurance(index, PatientID, age, gender, bmi, bloodpressure, diabetic, children, smoker, region, claim)
 FROM 'D:\Data\SQL_data\insurance_data.csv'
 DELIMITER ','
